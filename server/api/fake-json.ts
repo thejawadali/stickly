@@ -1,4 +1,6 @@
-const fakeData = [
+import type { ICard } from '../../types/types'
+
+const fakeData: ICard[] = [
   {
     id: 1,
     body: JSON.stringify(
