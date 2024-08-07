@@ -36,7 +36,7 @@ const fakeData = [
       colorBody: '#FFF5DF',
       colorText: '#18181A',
     },
-    position: { x: 605, y: 500 },
+    position: { x: 605, y: 300 },
   },
 ]
 
