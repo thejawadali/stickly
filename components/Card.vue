@@ -1,31 +1,29 @@
 <script setup lang="ts">
-export interface ICard {
+import { deleteNote, updateNote } from '../utils/indexedDb.js'
+
+export interface INote {
   id: number
   body: string
-  colors: {
-    id: string
-    colorHeader: string
-    colorBody: string
-    colorText: string
-  }
-  position: {
-    x: number
-    y: number
-  }
+  header_color: string
+  body_color: string
+  text_color: string
+  pos_x: number
+  pos_y: number
 }
 
 const props = defineProps<{
-  cardData: ICard
+  cardData: INote
 }>()
-const da = ref('Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta esse, quo officia quia sit aliquam, excepturi libero qui')
+
+const bodyText = ref(props.cardData.body)
 const textarea = ref()
 const cardElem = ref<HTMLElement | null>()
 
 const { width: screenWidth, height: screenHeight } = useWindowSize()
 const zIndex = ref(1)
 
-const { style } = useDraggable(cardElem, {
-  initialValue: { x: props.cardData.position.x, y: props.cardData.position.y },
+const { style, x, y } = useDraggable(cardElem, {
+  initialValue: { x: props.cardData.pos_x, y: props.cardData.pos_y },
   onMove: (position) => {
     const width = cardElem?.value?.clientWidth || 0
     const height = cardElem?.value?.clientHeight || 0
@@ -37,6 +35,7 @@ const { style } = useDraggable(cardElem, {
   },
   onEnd: () => {
     zIndex.value = 1
+    update()
   },
 })
 
@@ -47,20 +46,37 @@ function autoGrow() {
   }
 }
 
+watchDebounced(
+  bodyText,
+  update,
+  { debounce: 500, maxWait: 1000 },
+)
+
 onMounted(autoGrow)
+
+async function update() {
+  await updateNote(props.cardData.id, {
+    ...props.cardData,
+    body: bodyText.value,
+    pos_x: x.value,
+    pos_y: y.value,
+  })
+}
 </script>
 
 <template>
   <div
-    ref="cardElem" :style="`background-color: ${cardData.colors.colorBody}; color: ${cardData.colors.colorText};
-    ${style} z-index: ${zIndex};`" class="absolute w-[400px] cursor-pointer overflow-hidden rounded-md bg-green shadow"
+    ref="cardElem" :style="`background-color: ${cardData.body_color}; color: ${cardData.text_color};
+    ${style} z-index: ${zIndex};`"
+    class="absolute w-[400px] cursor-pointer overflow-hidden rounded-md bg-green shadow"
   >
     <!-- header -->
-    <div :style="`background-color: ${cardData.colors.colorHeader};`" class="flex items-center justify-between p-1.5">
+    <div :style="`background-color: ${cardData.header_color};`" class="flex items-center justify-between p-1.5">
       <!-- <div i-material-symbols:delete text-4xl /> -->
       <svg
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" stroke="#000000" fill="none"
-        strokeWidth="1.5"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24" width="24" height="24" stroke="#000000" fill="none" strokeWidth="1.5"
+        @click="deleteNote(cardData.id)"
       >
         <path
           d="m6 8 .668 8.681c.148 1.924.222 2.885.84 3.423.068.06.14.115.217.165.685.449 1.63.26 3.522-.118.36-.072.54-.108.721-.111h.064c.182.003.361.039.72.11 1.892.379 2.838.568 3.523.12.076-.05.15-.106.218-.166.617-.538.691-1.5.84-3.423L18 8"
@@ -71,7 +87,7 @@ onMounted(autoGrow)
         />
       </svg>
     </div>
-    <UTextarea ref="textarea" v-model="da" variant="none" class="w-full [&_textarea]:max-h-[200px]" @input="autoGrow" />
+    <UTextarea ref="textarea" v-model="bodyText" variant="none" class="w-full [&_textarea]:max-h-[200px]" @input="autoGrow" />
   </div>
 </template>
 
