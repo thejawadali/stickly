@@ -71,7 +71,7 @@ onMounted(autoGrow)
         />
       </svg>
     </div>
-    <UTextarea ref="textarea" v-model="da" variant="none" class="w-full" @input="autoGrow" />
+    <UTextarea ref="textarea" v-model="da" variant="none" class="w-full [&_textarea]:max-h-[200px]" @input="autoGrow" />
   </div>
 </template>
 
