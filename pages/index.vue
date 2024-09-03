@@ -7,9 +7,7 @@ async function createNewNote() {
   const nn: Note = {
     body: '',
     title: 'New Note',
-    header_color: '#AFDA9F',
-    body_color: '#BCDEAF',
-    text_color: '#18181A',
+    color: 'yellow',
     pos_x: 0,
     pos_y: 0,
   }

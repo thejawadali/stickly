@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { deleteNote, updateNote } from '../utils/indexedDb.js'
-import type { Note } from '../types.ts'
+import type { ColorKey, Note } from '../types.ts'
+import { colorOptions } from '../utils/colorOptions.js'
 
 const props = defineProps<{
   cardData: Note
@@ -8,6 +9,7 @@ const props = defineProps<{
 const bodyText = ref(props.cardData.body)
 const title = ref(props.cardData.title)
 const textarea = ref()
+const color = ref<ColorKey>(props.cardData.color)
 const cardElem = ref<HTMLElement | null>()
 
 const { width: screenWidth, height: screenHeight } = useWindowSize()
@@ -38,7 +40,7 @@ function autoGrow() {
 }
 
 watchDebounced(
-  [bodyText, title],
+  [bodyText, title, color],
   update,
   { debounce: 500, maxWait: 1000 },
 )
@@ -50,6 +52,7 @@ async function update() {
     ...props.cardData,
     title: title.value,
     body: bodyText.value,
+    color: color.value,
     pos_x: x.value,
     pos_y: y.value,
   })
@@ -58,13 +61,16 @@ async function update() {
 
 <template>
   <div
-    ref="cardElem" :style="`background-color: ${cardData.body_color}; color: ${cardData.text_color};
+    ref="cardElem" :style="`background-color: ${colorOptions[`${color}`].body};
     ${style} z-index: ${zIndex};`"
-    class="absolute w-[400px] cursor-pointer overflow-hidden rounded-md bg-green shadow"
+    class="absolute w-[400px] cursor-pointer overflow-hidden rounded-md bg-green text-black shadow"
   >
     <!-- header -->
-    <CardHeader v-model:title="title" @delete="deleteNote(cardData.id as number)" />
-    <UTextarea ref="textarea" v-model="bodyText" variant="none" class="w-full [&_textarea]:max-h-[200px]" @input="autoGrow" />
+    <CardHeader v-model:title="title" v-model:color="color" @delete="deleteNote(cardData.id as number)" />
+    <UTextarea
+      ref="textarea" v-model="bodyText" variant="none" class="w-full [&_textarea]:max-h-[200px]"
+      @input="autoGrow"
+    />
   </div>
 </template>
 
