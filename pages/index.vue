@@ -8,8 +8,8 @@ async function createNewNote() {
     body: '',
     title: 'New Note',
     color: 'yellow',
-    pos_x: 0,
-    pos_y: 0,
+    pos_x: 40,
+    pos_y: 40,
   }
   await createNote(nn)
   notes.value = await fetchNotes()
@@ -27,9 +27,7 @@ function _deleteNote(id: number) {
 
 <template>
   <div>
-    <button @click="createNewNote">
-      add new
-    </button>
+    <UButton icon="i-carbon:add-large" size="xl" color="primary" square class="absolute left-1 top-1" variant="link" @click="createNewNote" />
     <div class="overflow-auto p-40">
       <Card v-for="card in notes" :key="card.id" :card-data="card" @delete="_deleteNote" />
     </div>
