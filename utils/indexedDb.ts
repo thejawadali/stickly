@@ -1,14 +1,5 @@
 import { openDB } from 'idb'
-
-export interface INote {
-  id?: number
-  body: string
-  header_color: string
-  body_color: string
-  text_color: string
-  pos_x: number
-  pos_y: number
-}
+import type { Note } from '../types.ts'
 
 // Database configuration
 const dbName = 'sticky_notes_db'
@@ -25,7 +16,7 @@ export async function initDB() {
 }
 
 // Create a note
-export async function createNote(note: INote) {
+export async function createNote(note: Note) {
   const db = await initDB()
   const tx = db.transaction(storeName, 'readwrite')
   const store = tx.objectStore(storeName)
@@ -34,7 +25,7 @@ export async function createNote(note: INote) {
 }
 
 // Read all notes
-export async function fetchNotes(): Promise<INote[]> {
+export async function fetchNotes(): Promise<Note[]> {
   const db = await initDB()
   const tx = db.transaction(storeName, 'readonly')
   const store = tx.objectStore(storeName)
@@ -44,7 +35,7 @@ export async function fetchNotes(): Promise<INote[]> {
 }
 
 // Update a note by ID
-export async function updateNote(id: number, updatedNote: INote) {
+export async function updateNote(id: number, updatedNote: Note) {
   const db = await initDB()
   const tx = db.transaction(storeName, 'readwrite')
   const store = tx.objectStore(storeName)

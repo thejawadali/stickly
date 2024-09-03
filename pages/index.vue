@@ -1,20 +1,12 @@
 <script setup lang="ts">
 import { createNote, fetchNotes } from '../utils/indexedDb.js'
+import type { Note } from '../types.ts'
 
-export interface INote {
-  id?: number
-  body: string
-  header_color: string
-  body_color: string
-  text_color: string
-  pos_x: number
-  pos_y: number
-}
-
-const notes = ref<INote[]>([])
+const notes = ref<Note[]>([])
 async function createNewNote() {
-  const nn: INote = {
-    body: '2new note from with indexed db',
+  const nn: Note = {
+    body: '',
+    title: 'New Note',
     header_color: '#AFDA9F',
     body_color: '#BCDEAF',
     text_color: '#18181A',
