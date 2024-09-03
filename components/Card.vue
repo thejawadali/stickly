@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { deleteNote, updateNote } from '../utils/indexedDb.js'
+import { updateNote } from '../utils/indexedDb.js'
 import type { ColorKey, Note } from '../types.ts'
 import { colorOptions } from '../utils/colorOptions.js'
 
 const props = defineProps<{
   cardData: Note
+}>()
+const emit = defineEmits<{
+  (e: 'delete', id: number): void
 }>()
 const bodyText = ref(props.cardData.body)
 const title = ref(props.cardData.title)
@@ -66,7 +69,7 @@ async function update() {
     class="absolute w-[400px] cursor-pointer overflow-hidden rounded-md bg-green text-black shadow"
   >
     <!-- header -->
-    <CardHeader v-model:title="title" v-model:color="color" @delete="deleteNote(cardData.id as number)" />
+    <CardHeader v-model:title="title" v-model:color="color" @delete="emit('delete', cardData.id as number)" />
     <UTextarea
       ref="textarea" v-model="bodyText" variant="none" class="w-full [&_textarea]:max-h-[200px]"
       @input="autoGrow"

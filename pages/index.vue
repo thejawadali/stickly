@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createNote, fetchNotes } from '../utils/indexedDb.js'
+import { createNote, deleteNote, fetchNotes } from '../utils/indexedDb.js'
 import type { Note } from '../types.ts'
 
 const notes = ref<Note[]>([])
@@ -18,6 +18,11 @@ async function createNewNote() {
 onMounted(async () => {
   notes.value = await fetchNotes()
 })
+
+function _deleteNote(id: number) {
+  deleteNote(id)
+  notes.value = notes.value.filter(note => note.id !== id)
+}
 </script>
 
 <template>
@@ -26,7 +31,7 @@ onMounted(async () => {
       add new
     </button>
     <div class="overflow-auto p-40">
-      <Card v-for="card in notes" :key="card.id" :card-data="card" />
+      <Card v-for="card in notes" :key="card.id" :card-data="card" @delete="_deleteNote" />
     </div>
   </div>
 </template>
