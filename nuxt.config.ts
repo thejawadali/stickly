@@ -1,4 +1,3 @@
-import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
@@ -6,20 +5,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
-    '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxt/ui',
   ],
-
-  experimental: {
-    // when using generate, payload js assets included in sw precache manifest
-    // but missing on offline, disabling extraction it until fixed
-    payloadExtraction: false,
-    renderJsonPayloads: true,
-    typedPages: true,
-  },
-
   imports: {
     dirs: [
       './types',
@@ -30,23 +19,6 @@ export default defineNuxtConfig({
     '@unocss/reset/tailwind.css',
     './assets/index.css',
   ],
-
-  colorMode: {
-    classSuffix: '',
-  },
-
-  nitro: {
-    esbuild: {
-      options: {
-        target: 'esnext',
-      },
-    },
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/hi'],
-    },
-  },
 
   app: {
     head: {
@@ -66,8 +38,6 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa,
-
   devtools: {
     enabled: true,
   },
@@ -82,6 +52,4 @@ export default defineNuxtConfig({
       standalone: false,
     },
   },
-
-  compatibilityDate: '2024-08-07',
 })
