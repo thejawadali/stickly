@@ -1,5 +1,4 @@
 import { openDB } from 'idb'
-import type { Note } from '../types.ts'
 
 // Database configuration
 const dbName = 'sticky_notes_db'

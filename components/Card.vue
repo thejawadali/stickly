@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { updateNote } from '../utils/indexedDb.js'
-import type { ColorKey, Note } from '../types.ts'
 import { colorOptions } from '../utils/colorOptions.js'
+import type { ColorKey, Note } from '~/types/types'
 
 const props = defineProps<{
   cardData: Note

@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
-    "@nuxt/ui"
+    '@nuxt/ui',
   ],
 
   experimental: {
@@ -18,6 +18,12 @@ export default defineNuxtConfig({
     payloadExtraction: false,
     renderJsonPayloads: true,
     typedPages: true,
+  },
+
+  imports: {
+    dirs: [
+      './types',
+    ],
   },
 
   css: [

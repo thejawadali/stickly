@@ -1,14 +1,10 @@
-export interface ICard {
-  id: number
+export interface Note {
+  id?: number
+  title: string
   body: string
-  colors: {
-    id: string
-    colorHeader: string
-    colorBody: string
-    colorText: string
-  }
-  position: {
-    x: number
-    y: number
-  }
+  color: ColorKey
+  pos_x: number
+  pos_y: number
 }
+
+export type ColorKey = 'gray' | 'yellow' | 'blue' | 'green' | 'pink' | 'purple'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { createNote, deleteNote, fetchNotes } from '../utils/indexedDb.js'
-import type { Note } from '../types.ts'
+import type { Note } from '~/types/types'
 
 const notes = ref<Note[]>([])
 async function createNewNote() {

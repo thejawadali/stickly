@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { colorOptions } from '../utils/colorOptions.js'
-import type { ColorKey } from '../types.ts'
+import type { ColorKey } from '~/types/types'
 
 const emit = defineEmits<{
   (e: 'delete'): void
