@@ -28,9 +28,6 @@ devDependencies:
   '@nuxt/ui':
     specifier: ^2.18.4
     version: 2.18.4(rollup@2.79.1)(vite@5.4.2)(vue@3.4.38)
-  '@nuxtjs/color-mode':
-    specifier: ^3.4.1
-    version: 3.4.4(rollup@2.79.1)
   '@pinia/nuxt':
     specifier: ^0.5.1
     version: 0.5.3(rollup@2.79.1)(typescript@5.5.4)(vue@3.4.38)
