@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxt/ui',
-    "@sidebase/nuxt-auth"
+    "@sidebase/nuxt-auth",
+    'nuxt-mongoose',
   ],
   imports: {
     dirs: [
