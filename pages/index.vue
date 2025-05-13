@@ -1,27 +1,41 @@
 <script setup lang="ts">
-import { createNote, deleteNote, fetchNotes } from '../utils/indexedDb.js'
 import type { Note } from '~/types/types'
 
-const notes = ref<Note[]>([])
-async function createNewNote() {
-  const nn: Note = {
+const { execute: createNewNote } = useFetch('/api/notes', {
+  method: 'POST',
+  immediate: false,
+  body: {
+    title: 'Untitled',
     body: '',
-    title: 'New Note',
     color: 'yellow',
     pos_x: 40,
     pos_y: 40,
+  },
+  onResponse() {
+    refresh()
   }
-  await createNote(nn)
-  notes.value = await fetchNotes()
-}
-
-onMounted(async () => {
-  notes.value = await fetchNotes()
 })
 
-function _deleteNote(id: number) {
-  deleteNote(id)
-  notes.value = notes.value.filter(note => note.id !== id)
+
+const { data: notes, refresh } = useFetch<Note[]>('/api/notes', {
+  method: 'get',
+})
+
+
+
+async function deleteNote(id: any) {
+  await $fetch(`/api/notes/${id}`, {
+    method: 'DELETE',
+  })
+  refresh()
+}
+
+async function updateNote(id: any, note: Note) {
+  await $fetch(`/api/notes/${id}`, {
+    method: 'PUT',
+    body: note,
+  })
+  refresh()
 }
 </script>
 
@@ -29,7 +43,7 @@ function _deleteNote(id: number) {
   <div>
     <UButton icon="i-carbon:add-large" size="xl" color="primary" square class="absolute left-1 top-1" variant="link" @click="createNewNote" />
     <div class="overflow-auto p-40">
-      <Card v-for="card in notes" :key="card.id" :card-data="card" @delete="_deleteNote" />
+      <Card v-for="card in notes" :key="card._id" :card-data="card" @delete="deleteNote(card._id)" @update="updateNote(card._id, $event)" />
     </div>
   </div>
 </template>
