@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxt/ui',
+    "@sidebase/nuxt-auth"
   ],
   imports: {
     dirs: [
