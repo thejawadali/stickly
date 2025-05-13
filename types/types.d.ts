@@ -1,5 +1,6 @@
+import type { ObjectId } from 'mongoose'
 export interface Note {
-  id?: number
+  _id: ObjectId
   title: string
   body: string
   color: ColorKey

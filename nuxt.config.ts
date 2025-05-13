@@ -8,9 +8,10 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxt/ui',
-    "@sidebase/nuxt-auth",
+    // "@sidebase/nuxt-auth",
     'nuxt-mongoose',
   ],
+
   imports: {
     dirs: [
       './types',
@@ -54,4 +55,13 @@ export default defineNuxtConfig({
       standalone: false,
     },
   },
+
+  // mongoose: {
+  //   uri: process.env.MONGODB_URI,
+  //   options: {},
+  //   modelsDir: 'models',
+  //   devtools: true,
+  // },
+
+  compatibilityDate: '2025-05-13',
 })
