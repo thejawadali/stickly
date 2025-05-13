@@ -31,12 +31,22 @@ const { style, x, y } = useDraggable(cardElem, {
   },
   onEnd: () => {
     zIndex.value = 1
-    // only change if the note has been moved
-    if (x.value !== props.cardData.pos_x || y.value !== props.cardData.pos_y) {
-      update()
-    }
+    update()
+    // // only change if the note has been moved
+    // if (x.value !== props.cardData.pos_x || y.value !== props.cardData.pos_y) {
+    // }
   },
 })
+
+function isModified() {
+  return (
+    title.value !== props.cardData.title ||
+    bodyText.value !== props.cardData.body ||
+    color.value !== props.cardData.color ||
+    x.value !== props.cardData.pos_x ||
+    y.value !== props.cardData.pos_y
+  )
+}
 
 function autoGrow() {
   if (textarea.value) {
@@ -54,16 +64,15 @@ watchDebounced(
 onMounted(autoGrow)
 
 async function update() {
-  const updatedNote = {
+  if (!isModified()) return
+  emit('update', {
     ...props.cardData,
     title: title.value,
     body: bodyText.value,
     color: color.value,
     pos_x: x.value,
     pos_y: y.value,
-  }
-
-  emit('update', updatedNote )
+  } )
 }
 </script>
 

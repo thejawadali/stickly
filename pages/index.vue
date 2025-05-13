@@ -5,8 +5,8 @@ const { execute: createNewNote } = useFetch('/api/notes', {
   method: 'POST',
   immediate: false,
   body: {
-    title: 'New Note',
-    body: 'Its body buddy',
+    title: 'Untitled',
+    body: '',
     color: 'yellow',
     pos_x: 40,
     pos_y: 40,
