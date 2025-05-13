@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { createNote, fetchNotes } from '../utils/indexedDb.js'
 import type { Note } from '~/types/types'
-
-// const notes = ref<Note[]>([])
 
 const { execute: createNewNote } = useFetch('/api/notes', {
   method: 'POST',
@@ -18,8 +15,6 @@ const { execute: createNewNote } = useFetch('/api/notes', {
     refresh()
   }
 })
-
-// const { data, pending, error, refresh } = useFetch('/api/notes')
 
 
 const { data: notes, refresh } = useFetch<Note[]>('/api/notes', {
