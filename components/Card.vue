@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { updateNote } from '../utils/indexedDb.js'
 import { colorOptions } from '../utils/colorOptions.js'
 import type { ColorKey, Note } from '~/types/types'
 
@@ -7,7 +6,8 @@ const props = defineProps<{
   cardData: Note
 }>()
 const emit = defineEmits<{
-  (e: 'delete', id: number): void
+  (e: 'delete'): void,
+  (e: 'update', note: Note): void
 }>()
 const bodyText = ref(props.cardData.body)
 const title = ref(props.cardData.title)
@@ -31,7 +31,10 @@ const { style, x, y } = useDraggable(cardElem, {
   },
   onEnd: () => {
     zIndex.value = 1
-    update()
+    // only change if the note has been moved
+    if (x.value !== props.cardData.pos_x || y.value !== props.cardData.pos_y) {
+      update()
+    }
   },
 })
 
@@ -51,14 +54,16 @@ watchDebounced(
 onMounted(autoGrow)
 
 async function update() {
-  await updateNote(props.cardData.id as number, {
+  const updatedNote = {
     ...props.cardData,
     title: title.value,
     body: bodyText.value,
     color: color.value,
     pos_x: x.value,
     pos_y: y.value,
-  })
+  }
+
+  emit('update', updatedNote )
 }
 </script>
 
@@ -69,7 +74,7 @@ async function update() {
     class="absolute w-[400px] cursor-pointer overflow-hidden rounded-md bg-green text-black shadow"
   >
     <!-- header -->
-    <CardHeader v-model:title="title" v-model:color="color" @delete="emit('delete', cardData.id as number)" />
+    <CardHeader v-model:title="title" v-model:color="color" @delete="emit('delete')" />
     <UTextarea
       ref="textarea" v-model="bodyText" variant="none" class="w-full [&_textarea]:max-h-[200px]"
       @input="autoGrow"
