@@ -41,7 +41,7 @@ async function updateNote(id: any, note: Note) {
 
 <template>
   <div>
-    <UButton icon="i-carbon:add-large" size="xl" color="primary" square class="absolute left-1 top-1" variant="link" @click="createNewNote" />
+    <UButton con="i-carbon:add-large" size="xl" color="primary" square class="absolute left-2 top-2"  @click="createNewNote" label="Add Note" />
     <div class="overflow-auto p-40">
       <Card v-for="card in notes" :key="String(card._id)" :card-data="card" @delete="deleteNote(card._id)" @update="updateNote(card._id, $event)" />
     </div>
