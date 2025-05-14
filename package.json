@@ -15,7 +15,9 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "idb": "^8.0.0"
+    "better-auth": "^1.2.7",
+    "idb": "^8.0.0",
+    "mongoose": "^8.14.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.17.0",

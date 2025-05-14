@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui',
     // "@sidebase/nuxt-auth",
-    'nuxt-mongoose',
+    // 'nuxt-mongoose',
   ],
 
   imports: {
@@ -40,6 +40,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  runtimeConfig: {
+    mongoUri: process.env.MONGODB_URI,
+  },
 
   devtools: {
     enabled: true,
@@ -49,7 +52,9 @@ export default defineNuxtConfig({
     // For UnoCSS
     inlineStyles: false,
   },
-
+  nitro: {
+    plugins: ["~/server/plugins/mongoose.ts"],
+  },
   eslint: {
     config: {
       standalone: false,
