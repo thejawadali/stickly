@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000
+
+# @name createNote
+POST {{baseUrl}}/api/notes HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Test Note",
+  "pos_x": 100,
+  "pos_y": 100,
+  "color": "blue",
+  "body": "This is a test note"
+}

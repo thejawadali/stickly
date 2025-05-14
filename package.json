@@ -18,7 +18,8 @@
     "better-auth": "^1.2.7",
     "idb": "^8.0.0",
     "mongodb": "^6.16.0",
-    "mongoose": "^8.14.3"
+    "mongoose": "^8.14.3",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.17.0",
