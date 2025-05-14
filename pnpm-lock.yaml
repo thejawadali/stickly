@@ -11,6 +11,9 @@ dependencies:
   idb:
     specifier: ^8.0.0
     version: 8.0.3
+  mongodb:
+    specifier: ^6.16.0
+    version: 6.16.0
   mongoose:
     specifier: ^8.14.3
     version: 8.14.3

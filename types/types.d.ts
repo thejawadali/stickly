@@ -1,6 +1,7 @@
 import type { ObjectId } from 'mongoose'
 export interface Note {
   _id: ObjectId
+  // user_id: ObjectId
   title: string
   body: string
   color: ColorKey
