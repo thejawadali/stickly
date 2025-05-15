@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import type { Note } from '~/types/types'
 
+
+definePageMeta({
+  middleware: ["auth"]
+})
+
 const { execute: createNewNote } = useFetch('/api/notes', {
   method: 'POST',
   immediate: false,
