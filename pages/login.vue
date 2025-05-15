@@ -6,11 +6,20 @@ console.log(session)
 
 <template>
   <div>
-    <button v-if="!session?.data" @click="() => authClient.signIn.social({
-      provider: 'github'
-    })">
-      Continue with GitHub
-    </button>
+    <template v-if="!session?.data">
+      <button @click="() => authClient.signIn.social({
+        provider: 'github'
+      })">
+        Continue with GitHub
+      </button>
+      <br>
+      <br>
+      <button @click="() => authClient.signIn.social({
+        provider: 'google'
+      })">
+        Continue with Google
+      </button>
+    </template>
     <div>
       <pre>{{ session.data }}</pre>
       <button v-if="session.data" @click="authClient.signOut()">

@@ -42,6 +42,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     mongoUri: process.env.MONGODB_URI,
+    githubId: process.env.AUTH_GITHUB_ID,
+    githubSecret: process.env.AUTH_GITHUB_SECRET,
+    googleId: process.env.AUTH_GOOGLE_ID,
+    googleSecret: process.env.AUTH_GOOGLE_SECRET,
   },
 
   devtools: {
