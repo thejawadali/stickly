@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxt/ui',
-    '@vee-validate/nuxt',
   ],
 
   imports: {
