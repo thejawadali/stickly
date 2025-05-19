@@ -6,7 +6,7 @@ const props = defineProps<{
   cardData: Note
 }>()
 const emit = defineEmits<{
-  (e: 'delete'): void,
+  (e: 'delete'): void
   (e: 'update', note: Note): void
 }>()
 const bodyText = ref(props.cardData.body)
@@ -40,11 +40,11 @@ const { style, x, y } = useDraggable(cardElem, {
 
 function isModified() {
   return (
-    title.value !== props.cardData.title ||
-    bodyText.value !== props.cardData.body ||
-    color.value !== props.cardData.color ||
-    x.value !== props.cardData.pos_x ||
-    y.value !== props.cardData.pos_y
+    title.value !== props.cardData.title
+    || bodyText.value !== props.cardData.body
+    || color.value !== props.cardData.color
+    || x.value !== props.cardData.pos_x
+    || y.value !== props.cardData.pos_y
   )
 }
 
@@ -64,7 +64,8 @@ watchDebounced(
 onMounted(autoGrow)
 
 async function update() {
-  if (!isModified()) return
+  if (!isModified())
+    return
   emit('update', {
     ...props.cardData,
     title: title.value,
@@ -72,7 +73,7 @@ async function update() {
     color: color.value,
     pos_x: x.value,
     pos_y: y.value,
-  } )
+  })
 }
 </script>
 

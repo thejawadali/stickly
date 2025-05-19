@@ -1,6 +1,6 @@
-import { betterAuth } from "better-auth"
-import { mongodbAdapter } from "better-auth/adapters/mongodb"
-import { MongoClient } from "mongodb"
+import { betterAuth } from 'better-auth'
+import { mongodbAdapter } from 'better-auth/adapters/mongodb'
+import { MongoClient } from 'mongodb'
 
 const config = useRuntimeConfig()
 const client = new MongoClient(config.mongoUri)
@@ -8,7 +8,7 @@ const db = client.db()
 export const auth = betterAuth({
   database: mongodbAdapter(db),
   emailAndPassword: {
-    enabled: true
+    enabled: true,
   },
   socialProviders: {
     github: {

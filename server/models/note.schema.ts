@@ -1,6 +1,5 @@
+import { Schema, model } from 'mongoose'
 import type { Note as NoteType } from '~/types/types'
-import { Schema, model } from "mongoose"
-
 
 export const NoteSchema = new Schema<NoteType>({
   // user_id: {
@@ -26,12 +25,8 @@ export const NoteSchema = new Schema<NoteType>({
     type: Number,
     required: true,
   },
-},
-  {
-    timestamps: true,
-  }
-)
-
-
+}, {
+  timestamps: true,
+})
 
 export const Note = model<NoteType>('Note', NoteSchema)

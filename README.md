@@ -15,6 +15,7 @@ A modern web application built with Nuxt.js that provides a seamless user experi
 ## Tech Stack
 
 ### Frontend
+
 - [Nuxt 3](https://nuxt.com/) - Vue.js framework
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
 - [Nuxt UI](https://ui.nuxt.com/) - UI components
@@ -24,11 +25,13 @@ A modern web application built with Nuxt.js that provides a seamless user experi
 - [Vite PWA](https://vite-pwa-org.netlify.app/) - PWA support
 
 ### Backend
+
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Mongoose](https://mongoosejs.com/) - MongoDB object modeling
 - [Better Auth](https://www.npmjs.com/package/better-auth) - Authentication system
 
 ### Development Tools
+
 - [ESLint](https://eslint.org/) - Code linting
 - [pnpm](https://pnpm.io/) - Package manager
 - [Vue DevTools](https://devtools.vuejs.org/) - Development debugging

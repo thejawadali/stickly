@@ -1,4 +1,5 @@
 import type { ObjectId } from 'mongoose'
+
 export interface Note {
   _id: ObjectId
   // user_id: ObjectId

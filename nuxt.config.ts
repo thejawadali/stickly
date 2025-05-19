@@ -43,7 +43,7 @@ export default defineNuxtConfig({
     devOptions: {
       enabled: true,
       type: 'module',
-    }, 
+    },
   },
   imports: {
     dirs: [
@@ -90,7 +90,7 @@ export default defineNuxtConfig({
     inlineStyles: false,
   },
   nitro: {
-    plugins: ["~/server/plugins/mongoose.ts"],
+    plugins: ['~/server/plugins/mongoose.ts'],
   },
   eslint: {
     config: {

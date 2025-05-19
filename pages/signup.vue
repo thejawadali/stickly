@@ -2,20 +2,18 @@
 import { object, string } from 'yup'
 import { authClient } from '~~/utils/auth-client'
 
-
-
 const validationSchema = object({
   name: string().required('Name is required'),
   email: string().email('Invalid email').required('Email is required'),
   password: string()
     .min(8, 'Must be at least 8 characters')
-    .required('Password is required')
+    .required('Password is required'),
 })
 
 const state = reactive({
   name: undefined,
   email: undefined,
-  password: undefined
+  password: undefined,
 })
 
 const errorMessage = ref('')
@@ -29,21 +27,20 @@ async function onSubmit(event: any) {
   })
   if (error) {
     if (error) {
-    errorMessage.value = error?.message || 'Something went wrong'
-  }
+      errorMessage.value = error?.message || 'Something went wrong'
+    }
   }
   if (data) {
     navigateTo('/')
   }
 }
-
 </script>
 
 <template>
-  <UContainer class="grid place-content-center h-screen">
+  <UContainer class="grid h-screen place-content-center">
     <UCard class="w-[450px]">
       <template #header>
-        <h2 class="mt-6 text-3xl font-extrabold text-white">
+        <h2 class="mt-6 text-3xl text-white font-extrabold">
           Create your account
         </h2>
         <p class="text-sm text-gray-400">
@@ -64,13 +61,15 @@ async function onSubmit(event: any) {
           SignUp
         </UButton>
       </UForm>
-      <p v-if="errorMessage" class="text-xs text-red-600 mt-2 capitalize">{{ errorMessage }}</p>
+      <p v-if="errorMessage" class="mt-2 text-xs text-red-600 capitalize">
+        {{ errorMessage }}
+      </p>
       <template #footer>
         <div class="grid grid-cols-2 gap-3">
           <!-- github -->
           <UButton block color="gray" @click="authClient.signIn.social({ provider: 'github' })">
             <template #leading>
-              <Icon name="carbon:logo-github" class="w-5 h-5" />
+              <Icon name="carbon:logo-github" class="h-5 w-5" />
             </template>
             GitHub
           </UButton>
@@ -78,7 +77,7 @@ async function onSubmit(event: any) {
           <!-- google -->
           <UButton block color="gray" @click="authClient.signIn.social({ provider: 'google' })">
             <template #leading>
-              <Icon name="carbon:logo-google" class="w-5 h-5" />
+              <Icon name="carbon:logo-google" class="h-5 w-5" />
             </template>
             Google
           </UButton>

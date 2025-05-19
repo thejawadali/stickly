@@ -1,8 +1,8 @@
-import { authClient } from "~~/utils/auth-client";
+import { authClient } from '~~/utils/auth-client'
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
-	const { data: session } = await authClient.useSession(useFetch); 
+export default defineNuxtRouteMiddleware(async () => {
+  const { data: session } = await authClient.useSession(useFetch)
   if (!session.value) {
-    return navigateTo("/login")
+    return navigateTo('/login')
   }
-});
+})
