@@ -14,8 +14,8 @@ const validationSchema = object({
 const errorMessage = ref('')
 
 const state = reactive({
-  email: undefined,
-  password: undefined
+  email: 'john@doe.com',
+  password: '12345678'
 })
 
 
