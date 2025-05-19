@@ -18,7 +18,7 @@ const state = reactive({
   password: undefined
 })
 
-const toast = useToast()
+const errorMessage = ref('')
 
 async function onSubmit(event: any) {
   const { name, email, password } = event.data
@@ -28,12 +28,9 @@ async function onSubmit(event: any) {
     name,
   })
   if (error) {
-    if (error.code === 'USER_ALREADY_EXISTS') {
-      toast.add({
-        title: 'Error',
-        description: 'User already exists',
-      })
-    }
+    if (error) {
+    errorMessage.value = error?.message || 'Something went wrong'
+  }
   }
   if (data) {
     navigateTo('/')
@@ -49,8 +46,11 @@ async function onSubmit(event: any) {
         <h2 class="mt-6 text-3xl font-extrabold text-white">
           Create your account
         </h2>
+        <p class="text-sm text-gray-400">
+          Create an account to get started.
+        </p>
       </template>
-      <UForm :schema="validationSchema" :state="state" class="space-y-4" @submit="onSubmit">
+      <UForm :schema="validationSchema" :state="state" class="space-y-4" @submit="onSubmit" @vue:updated="errorMessage = ''">
         <UFormGroup label="Name" name="name">
           <UInput v-model="state.name" placeholder="John Doe" />
         </UFormGroup>
@@ -64,6 +64,7 @@ async function onSubmit(event: any) {
           SignUp
         </UButton>
       </UForm>
+      <p v-if="errorMessage" class="text-xs text-red-600 mt-2 capitalize">{{ errorMessage }}</p>
       <template #footer>
         <div class="grid grid-cols-2 gap-3">
           <!-- github -->

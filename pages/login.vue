@@ -11,6 +11,8 @@ const validationSchema = object({
     .required('Password is required')
 })
 
+const errorMessage = ref('')
+
 const state = reactive({
   email: undefined,
   password: undefined
@@ -23,20 +25,12 @@ async function onSubmit(event: any) {
     email,
     password,
   })
+  if (error) {
+    errorMessage.value = error?.message || 'Something went wrong'
+  }
   if (data) {
     navigateTo('/')
   }
-}
-
-const toast = useToast()
-function showToast() {
-  console.log('showToast');
-  
-  toast.add({
-    title: 'Success',
-    description: 'Your action was completed successfully.',
-    color: 'green'
-  })
 }
 </script>
 
@@ -44,21 +38,25 @@ function showToast() {
   <UContainer class="grid place-content-center h-screen">
     <UCard class="w-[450px]">
       <template #header>
-        <h2 @click="showToast" class="mt-6 text-3xl font-extrabold dark:text-white text-black">
+        <h2 class="mt-6 text-3xl font-extrabold dark:text-white text-black">
           Login to your account
         </h2>
+        <p class="text-sm text-gray-400">
+          Welcome back! Please enter your details to login.
+        </p>
       </template>
-      <UForm :schema="validationSchema" :state="state" class="space-y-4" @submit="onSubmit">
+      <UForm :schema="validationSchema" :state="state" class="space-y-4" @submit="onSubmit" @vue:updated="errorMessage = ''">
         <UFormGroup label="Email" name="email">
-          <UInput v-model="state.email" placeholder="john.doe@example.com" />
+          <UInput v-model="state.email" placeholder="john.doe@example.com" :error="errorMessage"/>
         </UFormGroup>
         <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" type="password" placeholder="Password" />
+          <UInput v-model="state.password" type="password" placeholder="Password" :error="errorMessage"/>
         </UFormGroup>
         <UButton type="submit" block color="primary" variant="solid">
           Login
         </UButton>
       </UForm>
+      <p v-if="errorMessage" class="text-xs text-red-600 mt-2 capitalize">{{ errorMessage }}</p>
       <template #footer>
         <div class="grid grid-cols-2 gap-3">
           <!-- github -->
