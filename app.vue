@@ -4,13 +4,17 @@ import { appName } from '~/constants'
 useHead({
   title: appName,
 })
+const colorMode = useColorMode()
+colorMode.preference = 'dark'
 </script>
 
 <template>
-  <VitePwaManifest />
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <!-- <VitePwaManifest /> -->
+  <!-- <NuxtLayout> -->
+    <UApp>
+      <NuxtPage />
+    </UApp>
+  <!-- </NuxtLayout> -->
 </template>
 
 <style>
