@@ -9,7 +9,42 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui',
   ],
-
+  pwa: {
+    manifest: {
+      name: 'Stickly',
+      short_name: 'Stickly',
+      description: 'Stickly',
+      icons: [
+        {
+          src: 'icons/64.png',
+          sizes: '64x64',
+          type: 'image/png',
+        },
+        {
+          src: 'icons/128.png',
+          sizes: '128x128',
+          type: 'image/png',
+        },
+        {
+          src: 'icons/256.png',
+          sizes: '256x256',
+          type: 'image/png',
+        },
+        {
+          src: 'icons/512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+      ],
+    },
+    workbox: {
+      navigateFallback: '/',
+    },
+    devOptions: {
+      enabled: true,
+      type: 'module',
+    }, 
+  },
   imports: {
     dirs: [
       './types',
