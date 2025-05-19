@@ -1,30 +1,37 @@
-import { defineMongooseModel } from '#nuxt/mongoose'
-import type { Note } from '~/types/types'
+import type { Note as NoteType } from '~/types/types'
+import { Schema, model } from "mongoose"
 
-export const NoteSchema = defineMongooseModel<Note>({
-  name: 'Note',
-  schema: {
-    title: {
-      type: String,
-      required: true,
-    },
-    body: {
-      type: String,
-    },
-    color: {
-      type: String,
-      default: 'green',
-    },
-    pos_x: {
-      type: Number,
-      required: true,
-    },
-    pos_y: {
-      type: Number,
-      required: true,
-    },
+
+export const NoteSchema = new Schema<NoteType>({
+  // user_id: {
+  //   type: Schema.Types.ObjectId,
+  //   required: true,
+  // },
+  title: {
+    type: String,
+    required: true,
   },
-  options: {
+  body: {
+    type: String,
+  },
+  color: {
+    type: String,
+    default: 'green',
+  },
+  pos_x: {
+    type: Number,
+    required: true,
+  },
+  pos_y: {
+    type: Number,
+    required: true,
+  },
+},
+  {
     timestamps: true,
-  },
-})
+  }
+)
+
+
+
+export const Note = model<NoteType>('Note', NoteSchema)

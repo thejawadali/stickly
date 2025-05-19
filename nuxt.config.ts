@@ -8,8 +8,6 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxt/ui',
-    // "@sidebase/nuxt-auth",
-    'nuxt-mongoose',
   ],
 
   imports: {
@@ -40,6 +38,13 @@ export default defineNuxtConfig({
       ],
     },
   },
+  runtimeConfig: {
+    mongoUri: process.env.MONGODB_URI,
+    githubId: process.env.AUTH_GITHUB_ID,
+    githubSecret: process.env.AUTH_GITHUB_SECRET,
+    googleId: process.env.AUTH_GOOGLE_ID,
+    googleSecret: process.env.AUTH_GOOGLE_SECRET,
+  },
 
   devtools: {
     enabled: true,
@@ -49,7 +54,9 @@ export default defineNuxtConfig({
     // For UnoCSS
     inlineStyles: false,
   },
-
+  nitro: {
+    plugins: ["~/server/plugins/mongoose.ts"],
+  },
   eslint: {
     config: {
       standalone: false,

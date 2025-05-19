@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import type { Note } from '~/types/types'
 
+
+definePageMeta({
+  middleware: ["auth"]
+})
+
 const { execute: createNewNote } = useFetch('/api/notes', {
   method: 'POST',
   immediate: false,
@@ -37,6 +42,11 @@ async function updateNote(id: any, note: Note) {
   })
   refresh()
 }
+
+async function signOut() {
+  await authClient.signOut()
+  navigateTo('/login')
+}
 </script>
 
 <template>
@@ -45,5 +55,6 @@ async function updateNote(id: any, note: Note) {
     <div class="overflow-auto p-40">
       <Card v-for="card in notes" :key="String(card._id)" :card-data="card" @delete="deleteNote(card._id)" @update="updateNote(card._id, $event)" />
     </div>
+    <UButton icon="i-lucide-log-out" size="md" color="primary" variant="solid" class="absolute right-2 bottom-2" @click="signOut"/>
   </div>
 </template>
