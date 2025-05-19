@@ -12,6 +12,7 @@ export default nuxt(
         'node/prefer-global/process': ['off'],
         'no-console': ['off'],
       },
+      ignores: ['.pnpm-store/**'],
     },
   ),
 )
