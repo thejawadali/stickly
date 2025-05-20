@@ -38,7 +38,7 @@ A modern web application built with Nuxt.js that provides a seamless user experi
 
 ## Demo
 
-[Add your demo URL here]
+[Stickly](https://stickly-five.vercel.app/login).
 
 ## Getting Started
 
