@@ -11,9 +11,7 @@ colorMode.preference = 'dark'
 <template>
   <VitePwaManifest />
   <NuxtLayout>
-    <UApp>
-      <NuxtPage />
-    </UApp>
+    <NuxtPage />
   </NuxtLayout>
 </template>
 

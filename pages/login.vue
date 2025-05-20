@@ -10,6 +10,7 @@ const validationSchema = object({
 })
 
 const errorMessage = ref('')
+const isLoading = ref(false)
 
 const state = reactive({
   email: 'john@doe.com',
@@ -17,6 +18,7 @@ const state = reactive({
 })
 
 async function onSubmit(event: any) {
+  isLoading.value = true
   const { email, password } = event.data
   const { data, error } = await authClient.signIn.email({
     email,
@@ -28,6 +30,7 @@ async function onSubmit(event: any) {
   if (data) {
     navigateTo('/')
   }
+  isLoading.value = false
 }
 </script>
 
@@ -49,7 +52,7 @@ async function onSubmit(event: any) {
         <UFormGroup label="Password" name="password">
           <UInput v-model="state.password" type="password" placeholder="Password" :error="errorMessage" />
         </UFormGroup>
-        <UButton type="submit" block color="primary" variant="solid">
+        <UButton type="submit" block color="primary" variant="solid" :loading="isLoading">
           Login
         </UButton>
       </UForm>
@@ -59,7 +62,7 @@ async function onSubmit(event: any) {
       <template #footer>
         <div class="grid grid-cols-2 gap-3">
           <!-- github -->
-          <UButton block color="gray" @click="authClient.signIn.social({ provider: 'github' })">
+          <UButton block color="gray" :loading="isLoading" @click="authClient.signIn.social({ provider: 'github' })">
             <template #leading>
               <Icon name="carbon:logo-github" class="h-5 w-5" />
             </template>
@@ -67,7 +70,7 @@ async function onSubmit(event: any) {
           </UButton>
 
           <!-- google -->
-          <UButton block color="gray" @click="authClient.signIn.social({ provider: 'google' })">
+          <UButton block color="gray" :loading="isLoading" @click="authClient.signIn.social({ provider: 'google' })">
             <template #leading>
               <Icon name="carbon:logo-google" class="h-5 w-5" />
             </template>
