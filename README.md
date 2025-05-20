@@ -1,7 +1,7 @@
 # Stickly
 
 A modern web application built with Nuxt.js that provides a seamless user experience for managing and organizing sticky notes.
-
+### [Stickly](https://stickly-five.vercel.app/login)
 ## Features
 
 - 📝 Create, edit, and delete sticky notes
@@ -36,9 +36,6 @@ A modern web application built with Nuxt.js that provides a seamless user experi
 - [pnpm](https://pnpm.io/) - Package manager
 - [Vue DevTools](https://devtools.vuejs.org/) - Development debugging
 
-## Demo
-
-[Stickly](https://stickly-five.vercel.app/login).
 
 ## Getting Started
 
